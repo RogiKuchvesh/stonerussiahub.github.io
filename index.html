@@ -6,35 +6,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root {
-      --bg: #05060a;
-      --card: #11131a;
-      --accent: #f4c066;
-      --accent-soft: rgba(244, 192, 102, 0.12);
+      --bg: #2b2520;
+      --card: #3d3530;
+      --accent: #d4a574;
+      --accent-soft: rgba(212, 165, 116, 0.12);
       --text: #f5f5f5;
-      --text-muted: #a1a5b5;
-      --border: #262938;
+      --text-muted: #b8b0a5;
+      --border: #4a4238;
       --radius-lg: 18px;
       --radius-full: 999px;
+      --stone-light: #a89a8f;
+      --stone-dark: #4a3f37;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #161822 0, #05060a 55%, #020308 100%);
+      background: linear-gradient(135deg, #3d3530 0%, #2b2520 40%, #1a1410 100%);
+      background-attachment: fixed;
       color: var(--text);
       padding: 16px 14px 32px;
       line-height: 1.5;
+      position: relative;
     }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(90deg, rgba(212, 165, 116, 0.02) 1px, transparent 1px),
+        linear-gradient(rgba(212, 165, 116, 0.02) 1px, transparent 1px);
+      background-size: 2px 2px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
     .page {
       max-width: 480px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
+    
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+      animation: fadeInDown 0.8s ease-out;
+    }
+    
+    .logo-svg {
+      width: 140px;
+      height: 140px;
+      filter: drop-shadow(0 15px 35px rgba(0,0,0,0.5));
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .chip {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       padding: 6px 10px;
       border-radius: var(--radius-full);
-      background: rgba(0,0,0,0.55);
+      background: rgba(0,0,0,0.4);
       border: 1px solid var(--border);
       font-size: 11px;
       color: var(--text-muted);
@@ -45,12 +93,13 @@
       height: 6px;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 12px rgba(244,192,102,0.9);
+      box-shadow: 0 0 12px rgba(212, 165, 116, 0.9);
     }
     h1 {
       font-size: 26px;
       letter-spacing: 0.03em;
       margin-bottom: 8px;
+      text-align: center;
     }
     h1 span {
       color: var(--accent);
@@ -59,12 +108,13 @@
       font-size: 13px;
       color: var(--text-muted);
       margin-bottom: 18px;
+      text-align: center;
     }
     .hero-card {
-      background: linear-gradient(135deg, rgba(244,192,102,0.08), rgba(5,6,10,0.9));
+      background: linear-gradient(135deg, rgba(212, 165, 116, 0.08), rgba(43, 37, 32, 0.9));
       border-radius: 22px;
       padding: 14px 14px 12px;
-      border: 1px solid rgba(244,192,102,0.35);
+      border: 1px solid rgba(212, 165, 116, 0.35);
       box-shadow: 0 18px 40px rgba(0,0,0,0.7);
       margin-bottom: 18px;
     }
@@ -90,7 +140,7 @@
       padding: 3px 8px;
       border-radius: var(--radius-full);
       background: rgba(0,0,0,0.35);
-      border: 1px solid rgba(244,192,102,0.6);
+      border: 1px solid rgba(212, 165, 116, 0.6);
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -134,12 +184,12 @@
       white-space: nowrap;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #ffdf9c);
-      color: #2b220f;
+      background: linear-gradient(135deg, var(--accent), #e8c594);
+      color: #3d2a1a;
       box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
     .btn-outline {
-      background: rgba(4,5,10,0.8);
+      background: rgba(61, 53, 48, 0.8);
       border-color: var(--border);
       color: var(--text-muted);
     }
@@ -170,7 +220,7 @@
       gap: 10px;
     }
     .card {
-      background: linear-gradient(135deg, rgba(10,11,16,0.96), rgba(5,6,10,1));
+      background: linear-gradient(135deg, rgba(61, 53, 48, 0.96), rgba(43, 37, 32, 1));
       border-radius: var(--radius-lg);
       padding: 10px 11px 9px;
       border: 1px solid var(--border);
@@ -188,9 +238,9 @@
       font-size: 10px;
       padding: 2px 7px;
       border-radius: var(--radius-full);
-      background: rgba(244,192,102,0.08);
+      background: rgba(212, 165, 116, 0.08);
       color: var(--accent);
-      border: 1px solid rgba(244,192,102,0.4);
+      border: 1px solid rgba(212, 165, 116, 0.4);
     }
     .card-text {
       font-size: 12px;
@@ -223,7 +273,7 @@
       border-radius: 999px;
       background: var(--accent-soft);
       border: 1px solid var(--accent);
-      box-shadow: 0 0 10px rgba(244,192,102,0.7);
+      box-shadow: 0 0 10px rgba(212, 165, 116, 0.7);
     }
     .rm-date {
       font-size: 11px;
@@ -268,169 +318,50 @@
 </head>
 <body>
   <div class="page">
-    <!-- HERO -->
-    <div class="chip">
-      <span></span> Платформа рынка камнеобработки РФ
-    </div>
-    <h1>КАМЕННАЯ <span>РОССИЯ</span></h1>
-    <div class="subtitle">
-      Первая профессиональная платформа для карьеров, производителей, дилеров и подрядчиков рынка камня. Всё просто, удобно и интуитивно понятно.
-    </div>
+    <!-- LOGO -->
+    <div class="logo-container">
+      <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Фон круга (камень) -->
+        <defs>
+          <radialGradient id="stoneBg" cx="50%" cy="30%">
+            <stop offset="0%" style="stop-color:#e8dcc8;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#d4c5b0;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#9a8975;stop-opacity:1" />
+          </radialGradient>
+          <filter id="shadow">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.4"/>
+          </filter>
+        </defs>
+        
+        <!-- Большой круг (основа) -->
+        ircle cx="100" cy="100" r="95" fill="url(#stoneBg)" stroke="#7a6e63" stroke-width="2" filter="url(#shadow)"/>
+        
+        <!-- Текстура камня -->
+        <g opacity="0.15">
+          <path d="M 50 50 Q 70 40 90 50 T 130 60" stroke="#5a4f47" stroke-width="1" fill="none"/>
+          <path d="M 60 80 Q 90 85 140 80" stroke="#5a4f47" stroke-width="1" fill="none"/>
+          <path d="M 70 120 Q 100 130 150 110" stroke="#5a4f47" stroke-width="1" fill="none"/>
+        </g>
+        
+        <!-- Разделительные линии между квадрантами -->
+        <line x1="100" y1="20" x2="100" y2="180" stroke="#7a6e63" stroke-width="2"/>
+        <line x1="20" y1="100" x2="180" y2="100" stroke="#7a6e63" stroke-width="2"/>
+        
+        <!-- Верхний левый квадрант: База данных (стопка слоев) -->
+        <g transform="translate(60, 60)">
+          <rect x="-12" y="-16" width="24" height="6" fill="#d4a574" rx="1"/>
+          <rect x="-14" y="-8" width="28" height="6" fill="#d4a574" rx="1"/>
+          <rect x="-16" y="0" width="32" height="6" fill="#d4a574" rx="1"/>
+        </g>
+        
+        <!-- Верхний правый квадрант: Картинка (рамка) -->
+        <g transform="translate(140, 60)">
+          <rect x="-12" y="-12" width="24" height="20" fill="none" stroke="#d4a574" stroke-width="2" rx="2"/>
+          ircle cx="-4" cy="-6" r="2" fill="#d4a574"/>
+          <polyline points="-12,6 -4,-2 4,4 12,0" fill="none" stroke="#d4a574" stroke-width="1.5" stroke-linejoin="round"/>
+        </g>
+        
+        <!-- Нижний левый квадрант: Книга (открытая) -->
+        <g transform="translate(60, 140)">
+          <path d="M -10 -8 L -
 
-    <div class="hero-card">
-      <div class="hero-row">
-        <div>
-          <div class="hero-title">Что уже внутри</div>
-          <div class="hero-text">
-            База компаний, доска объявлений и профили с контактами — в одном Телеграм‑сервисе.
-          </div>
-          <div class="hero-badge">
-            <span class="hero-badge-dot"></span>
-            Доступ без оплаты
-          </div>
-        </div>
-        <div class="hero-metric">
-          <span>компаний в базе</span>
-          <strong>{число_компаний}</strong>
-        </div>
-      </div>
-    </div>
-
-    <div class="btn-row">
-      <a href="https://t.me/StoneRussiaHub_bot" class="btn btn-primary">
-        Открыть сервис в Telegram
-      </a>
-      <a href="https://t.me/StoneRussiaHub_bot?start=3475589" class="btn btn-outline">
-        Добавить компанию
-      </a>
-    </div>
-
-    <!-- ДОСТУПНО -->
-    <section>
-      <div class="section-title">что уже доступно</div>
-      <span class="pill">Сервис работает прямо сейчас</span>
-      <div class="grid">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">База компаний</div>
-            <div class="card-tag">без оплаты</div>
-          </div>
-          <div class="card-text">
-            Карьеры, производители, дилеры. Поиск по фильтрам, названию или вся база целиком.
-          </div>
-          <div class="card-meta">
-            Карточка своей компании: добавление, редактирование, удаление, приглашение сотрудников.
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">Доска объявлений</div>
-            <div class="card-tag">без оплаты</div>
-          </div>
-          <div class="card-text">
-            Тематические доски по разным задачам: от продаж до поиска подрядчиков.
-          </div>
-          <div class="card-meta">
-            Обсуждения внутри объявления, не засоряя общую ленту. Количество объявлений не ограничено.
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">Профиль компании</div>
-            <div class="card-tag">в Telegram</div>
-          </div>
-          <div class="card-text">
-            Структурированная карточка с основными контактами и направлениями деятельности.
-          </div>
-          <div class="card-meta">
-            Всегда под рукой — прямо в Телеграме. Можно быстро обновлять данные.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- СКОРО ЗАПУСК -->
-    <section>
-      <div class="section-title">что запускается далее</div>
-      <span class="pill">Дорожная карта развития</span>
-      <div class="roadmap">
-        <div class="rm-item">
-          <div class="rm-dot"></div>
-          <div class="rm-date">февраль</div>
-          <div class="rm-title">Биржа труда</div>
-          <div class="card-text">
-            Вакансии и резюме специалистов рынка камня. Поиск по базе и фильтрам.
-          </div>
-        </div>
-        <div class="rm-item">
-          <div class="rm-dot"></div>
-          <div class="rm-date">март</div>
-          <div class="rm-title">Обучение и консультации</div>
-          <div class="card-text">
-            Актуальные обучающие материалы и разборы кейсов в удобных форматах.
-          </div>
-        </div>
-        <div class="rm-item">
-          <div class="rm-dot"></div>
-          <div class="rm-date">апрель</div>
-          <div class="rm-title">Тендерная площадка</div>
-          <div class="card-text">
-            Публикация запросов и участие в тендерах по камню и камнеобработке.
-          </div>
-        </div>
-        <div class="rm-item">
-          <div class="rm-dot"></div>
-          <div class="rm-date">по мере роста базы</div>
-          <div class="rm-title">Рейтинги и отзывы</div>
-          <div class="card-text">
-            Система доверия и обратной связи между участниками рынка.
-          </div>
-        </div>
-      </div>
-      <div class="footnote">
-        Сервис развивается как живая система вместе с пользователями. Можно предлагать новые разделы и темы досок.
-      </div>
-    </section>
-
-    <!-- ДЛЯ КОГО -->
-    <section>
-      <div class="section-title">для кого сервис</div>
-      <span class="pill">Весь рынок камня в одном окне</span>
-      <div class="grid">
-        <div class="card">
-          <div class="card-title">Карьеры и добыча</div>
-          <div class="card-text">
-            Видимость среди производителей и дилеров, поиск партнёров и подрядчиков.
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Производители</div>
-          <div class="card-text">
-            Новые каналы сбыта, объявления, участие в тендерах и подбор специалистов.
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Дилеры и склады</div>
-          <div class="card-text">
-            Быстрый выход на поставщиков и клиентов, обмен актуальной информацией по наличию.
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Проектировщики и подрядчики</div>
-          <div class="card-text">
-            Поиск надёжных поставщиков камня и исполнителей по всей России.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      <div>⚙ Техподдержка: ответим на вопросы и поможем с онбордингом пользователей.</div>
-      <div>Связаться: <a href="https://t.me/StoneRussiaHub_bot">через Telegram‑бота</a></div>
-    </footer>
-  </div>
-</body>
-</html>
